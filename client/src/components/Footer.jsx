@@ -31,7 +31,7 @@ const Footer = () => {
         <h3>Contact</h3>
         <div className="footer_right_info">
           <LocalPhone />
-          <p>+60 11-234 5678</p>
+          <p>+60 11 234 5678</p>
         </div>
         <div className="footer_right_info">
           <Email />
