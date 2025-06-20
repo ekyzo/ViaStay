@@ -35,6 +35,7 @@ const Listings = () => {
 
   useEffect(() => {
     getFeedListings();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   return (
@@ -42,7 +43,9 @@ const Listings = () => {
       <div className="category-list">
         {categories?.map((category, index) => (
           <div
-            className={`category ${category.label === selectedCategory ? "selected" : ""}`}
+            className={`category ${
+              category.label === selectedCategory ? "selected" : ""
+            }`}
             key={index}
             onClick={() => setSelectedCategory(category.label)}
           >
@@ -67,7 +70,7 @@ const Listings = () => {
               category,
               type,
               price,
-              booking=false
+              booking = false,
             }) => (
               <ListingCard
                 listingId={_id}
@@ -80,6 +83,7 @@ const Listings = () => {
                 type={type}
                 price={price}
                 booking={booking}
+                refreshListings={getFeedListings}
               />
             )
           )}

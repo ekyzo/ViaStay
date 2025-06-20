@@ -4,6 +4,8 @@ import {
   ArrowForwardIos,
   ArrowBackIosNew,
   Favorite,
+  Edit,
+  Delete,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,9 +25,15 @@ const ListingCard = ({
   endDate,
   totalPrice,
   booking,
+  refreshListings, // Optional: parent can pass refresh callback after deletion
 }) => {
-  /* SLIDER FOR IMAGES */
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+  const wishList = user?.wishList || [];
+  const isLiked = wishList?.find((item) => item?._id === listingId);
 
   const goToPrevSlide = () => {
     setCurrentIndex(
@@ -38,29 +46,39 @@ const ListingCard = ({
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length);
   };
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  /* ADD TO WISHLIST */
-  const user = useSelector((state) => state.user);
-  const wishList = user?.wishList || [];
-
-  const isLiked = wishList?.find((item) => item?._id === listingId);
-
   const patchWishList = async () => {
     if (user?._id !== creator._id) {
-    const response = await fetch(
-      `http://localhost:3001/users/${user?._id}/${listingId}`,
-      {
-        method: "PATCH",
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
+      const response = await fetch(
+        `http://localhost:3001/users/${user?._id}/${listingId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      dispatch(setWishList(data.wishList));
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.stopPropagation();
+    const confirm = window.confirm(
+      "Are you sure you want to delete this listing?"
     );
-    const data = await response.json();
-    dispatch(setWishList(data.wishList));
-  } else { return }
+    if (!confirm) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/properties/${listingId}`, {
+        method: "DELETE",
+      });
+      if (res.ok && typeof refreshListings === "function") {
+        refreshListings(); // optional callback to refresh listings in parent
+      }
+    } catch (err) {
+      console.log("Failed to delete listing:", err.message);
+    }
   };
 
   return (
@@ -79,13 +97,13 @@ const ListingCard = ({
             <div key={index} className="slide">
               <img
                 src={`http://localhost:3001/${photo?.replace("public", "")}`}
-                alt={`photo ${index + 1}`}
+                alt={`listing-${index}`}
               />
               <div
                 className="prev-button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  goToPrevSlide(e);
+                  goToPrevSlide();
                 }}
               >
                 <ArrowBackIosNew sx={{ fontSize: "15px" }} />
@@ -94,7 +112,7 @@ const ListingCard = ({
                 className="next-button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  goToNextSlide(e);
+                  goToNextSlide();
                 }}
               >
                 <ArrowForwardIos sx={{ fontSize: "15px" }} />
@@ -141,6 +159,24 @@ const ListingCard = ({
           <Favorite sx={{ color: "white" }} />
         )}
       </button>
+
+      {/* Edit & Delete buttons for the creator */}
+      {user?._id === creator?._id && (
+        <div className="listing-actions">
+          <button
+            className="edit-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/edit/${listingId}`);
+            }}
+          >
+            <Edit />
+          </button>
+          <button className="delete-btn" onClick={handleDelete}>
+            <Delete />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

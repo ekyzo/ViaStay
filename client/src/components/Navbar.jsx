@@ -21,8 +21,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <a href="/">
-        <img src="/assets/logo.png" alt="logo" />
+      <a href="/" className="logo-text">
+        ViaStay
       </a>
 
       <div className="navbar_search">
@@ -35,7 +35,9 @@ const Navbar = () => {
         <IconButton disabled={search === ""}>
           <Search
             sx={{ color: variables.pinkred }}
-            onClick={() => {navigate(`/properties/search/${search}`)}}
+            onClick={() => {
+              navigate(`/properties/search/${search}`);
+            }}
           />
         </IconButton>
       </div>
@@ -64,7 +66,7 @@ const Navbar = () => {
                 "public",
                 ""
               )}`}
-              alt="profile photo"
+              alt="profile"
               style={{ objectFit: "cover", borderRadius: "50%" }}
             />
           )}

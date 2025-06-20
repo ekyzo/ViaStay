@@ -11,6 +11,11 @@ import PropertyList from "./pages/PropertyList";
 import ReservationList from "./pages/ReservationList";
 import CategoryPage from "./pages/CategoryPage";
 import SearchPage from "./pages/SearchPage";
+import AboutPage from "./pages/AboutPage";
+import TermsPage from "./pages/TermsPage";
+import ReturnPolicyPage from "./pages/ReturnPolicyPage";
+import HostBookings from "./pages/HostBookings";
+import EditListing from "./pages/EditListing";
 
 function App() {
   return (
@@ -22,12 +27,20 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/properties/:listingId" element={<ListingDetails />} />
-          <Route path="/properties/category/:category" element={<CategoryPage />} />
+          <Route
+            path="/properties/category/:category"
+            element={<CategoryPage />}
+          />
           <Route path="/properties/search/:search" element={<SearchPage />} />
           <Route path="/:userId/trips" element={<TripList />} />
           <Route path="/:userId/wishList" element={<WishList />} />
           <Route path="/:userId/properties" element={<PropertyList />} />
           <Route path="/:userId/reservations" element={<ReservationList />} />
+          <Route path="/host/bookings" element={<HostBookings />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/return-policy" element={<ReturnPolicyPage />} />
+          <Route path="/edit/:listingId" element={<EditListing />} />
         </Routes>
       </BrowserRouter>
     </div>
