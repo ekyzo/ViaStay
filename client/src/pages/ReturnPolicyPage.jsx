@@ -9,7 +9,7 @@ const ReturnPolicyPage = () => {
       <section>
         <h2>1. Overview</h2>
         <p>
-          At DreamNest, we strive to provide you with the best booking
+          At ViaStay, we strive to provide you with the best booking
           experience. However, if you are not entirely satisfied with your
           booking, we’re here to help.
         </p>
@@ -42,7 +42,7 @@ const ReturnPolicyPage = () => {
         <h2>4. How to Request a Refund</h2>
         <p>
           To request a refund, please contact our support team at{" "}
-          <strong>support@dreamnest.com</strong>
+          <strong>support@ViaStay.com</strong>
           within 24 hours of check-in with photos or other relevant evidence.
         </p>
       </section>
@@ -69,7 +69,7 @@ const ReturnPolicyPage = () => {
         <h2>7. Contact Us</h2>
         <p>
           If you have any questions, feel free to reach out to us at{" "}
-          <strong>support@dreamnest.com</strong>.
+          <strong>support@ViaStay.com</strong>.
         </p>
       </section>
     </div>

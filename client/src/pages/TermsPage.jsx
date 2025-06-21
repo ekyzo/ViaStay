@@ -16,7 +16,7 @@ const TermsPage = () => {
             <FaCheckCircle className="icon" /> Acceptance of Terms
           </h2>
           <p>
-            By accessing or using DreamNest, you agree to be bound by these
+            By accessing or using ViaStay, you agree to be bound by these
             terms. If you do not agree, please do not use our service.
           </p>
         </section>
@@ -48,7 +48,7 @@ const TermsPage = () => {
           </h2>
           <p>
             Users retain rights to their content. By uploading, you grant
-            DreamNest a non-exclusive license to use, display, and distribute
+            ViaStay a non-exclusive license to use, display, and distribute
             your content.
           </p>
         </section>
@@ -68,7 +68,7 @@ const TermsPage = () => {
             <FaCheckCircle className="icon" /> Limitation of Liability
           </h2>
           <p>
-            DreamNest is not liable for indirect damages, including loss of
+            ViaStay is not liable for indirect damages, including loss of
             income or data arising from platform use.
           </p>
         </section>
