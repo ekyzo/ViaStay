@@ -5,9 +5,9 @@ const AboutPage = () => {
   return (
     <div className="about">
       <div className="about_hero">
-        <h1>About DreamNest</h1>
+        <h1>About ViaStay</h1>
         <p>
-          DreamNest connects travelers with unique accommodations and
+          ViaStay connects travelers with unique accommodations and
           unforgettable experiences worldwide.
         </p>
       </div>
